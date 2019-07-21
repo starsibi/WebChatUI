@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Saggezza - Chat Bot</title>
+	<link rel="icon" href="./Images/cropped-favicon_saggezza-32x32.png" sizes="32x32">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		html, body {
+			height: 100%
+		}
+
+		body {
+			margin: 0
+		}
+
+		#webchat {
+			height: 100%;
+			width: 100%;
+		}
+		#webchat>div{
+			background-image: url(./Images/Saggezza_background.png);
+		}
+
+		.main form input{
+			background: none;
+		}
+
+	</style>
+    <!--
+      This CDN points to the latest official release of Web Chat. If you need to test against Web Chat's latest bits, please refer to pointing to Web Chat's MyGet feed:
+      https://github.com/microsoft/BotFramework-WebChat#how-to-test-with-web-chats-latest-bits
+  -->
+  <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+
+  <!-- We are using simple-update-in package to simplify demo code. -->
+  <script src="https://unpkg.com/simple-update-in/dist/simple-update-in.production.min.js"></script>
+
+</head>
+<body>
+
+	<div id="webchat" role="main"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+	<script>
+		(async function () {
+            // In this demo, we are using Direct Line token from MockBot.
+            // To talk to your bot, you should use the token exchanged using your Direct Line secret.
+            // You should never put the Direct Line secret in the browser or client app.
+            // https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-authentication
+
+            const res = await fetch('https://webchat-mockbot.azurewebsites.net/directline/token', { method: 'POST' });
+            const { token } = await res.json();
+            var UserEmail = sessionStorage.getItem("UserEmailId");
+            var UserAvatar = sessionStorage.getItem("UserAvatar");
+
+            const styleOptions = {
+            	backgroundColor:'#83BB00',            	
+
+            	botAvatarImage: './Images/logo_saggezza.png',
+            	botAvatarInitials: 'SG',
+            	userAvatarImage: UserAvatar ,
+            	userAvatarInitials: '',
+
+            	// Send box
+				  hideSendBox: false,
+				  hideUploadButton: true,
+				  microphoneButtonColorOnDictate: '#F33',
+				  sendBoxBackground: 'rgba(0, 0, 0, 0.3)',
+				  sendBoxButtonColor: '#fff',
+				  sendBoxButtonColorOnDisabled: '#ccc',
+				  sendBoxButtonColorOnFocus: '#fff',
+				  sendBoxButtonColorOnHover: '#333',
+				  sendBoxHeight: 40,
+				  sendBoxMaxHeight: 200,
+				  sendBoxTextColor: 'White',
+				  sendBoxBorderBottom: '',
+				  sendBoxBorderLeft: '',
+				  sendBoxBorderRight: '',
+				  sendBoxBorderTop: 'none',
+				  sendBoxPlaceholderColor: '#fff',
+				  sendBoxTextWrap: false,         	
+            };
+
+
+            // We are adding a new middleware to customize the behavior of DIRECT_LINE/POST_ACTIVITY.
+            const store = window.WebChat.createStore(
+            	{},
+            	({ dispatch }) => next => action => {
+            		if (action.type === 'DIRECT_LINE/POST_ACTIVITY') {
+                        // The channelData submitted here is very similar to HTTP cookies and vulnerable to forgery attack.
+                        // Make sure you use signature to protect it and verify the signature on the bot side.
+
+                        // To minimize unexpected behaviors, we recommend to treat the "action" object as if it is immutable.
+                        // We use simple-update-in package to update "action" with partial deep cloning.
+                        action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'email'], () => UserEmail);
+                        action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'Name'], () => "UserEmail");
+                    }
+
+                    return next(action);
+                }
+                );
+
+            window.WebChat.renderWebChat({
+            	directLine: window.WebChat.createDirectLine({ token: 'Bg_uf1m3oOI.LqD3ef0uTHmollzaeZWXLXwurzrT6ISTP2Kj_Y63wII' }),
+                // We will use a custom version of Redux store, which we added middleware to handle backchannel messages.
+                store,
+                styleOptions,                 
+
+            }, document.getElementById('webchat'));
+
+
+
+            document.querySelector('#webchat > *').focus();
+        })().catch(err => console.error(err));
+    </script>   
+</body>
+</html>
