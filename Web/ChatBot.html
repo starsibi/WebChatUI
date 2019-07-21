@@ -3,6 +3,7 @@
 <head>
 	<title>Saggezza - Chat Bot</title>
 	<link rel="icon" href="./Images/cropped-favicon_saggezza-32x32.png" sizes="32x32">
+	<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Open+Sans">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		html, body {
@@ -10,7 +11,8 @@
 		}
 
 		body {
-			margin: 0
+			margin: 0;
+			font-family:'Open Sans', sans-serif;
 		}
 
 		#webchat {
@@ -24,7 +26,71 @@
 		.main form input{
 			background: none;
 		}
+		
+		.chat-title {
+			-webkit-box-flex: 0;
+			-webkit-flex: 0 1 45px;
+			-ms-flex: 0 1 45px;
+			flex: 0 1 45px;
+			position: fixed;
+			z-index: 2;
+			background: rgba(0, 0, 0, 0.2);
+			color: #fff;
+			text-transform: uppercase;
+			text-align: left;
+			padding: 10px 10px 10px 50px;
+		}
+		.chat-title h1, .chat-title h2 {
+			font-weight: bold;
+			font-size: 1.2rem;
+			color: black;
+			margin: 0;
+			padding: 0;
+		}
+		.chat-title {   
+			width: 100%;    
+			z-index: 2;
+			overflow: hidden;    
+			background-attachment: fixed;
+			background-size: 100%;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: justify;
+			-webkit-justify-content: space-between;
+			-ms-flex-pack: justify;
+			justify-content: space-between;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+		}
 
+		.chat-title .avatar {
+			position: absolute;
+			z-index: 1;
+			top: 8px;
+			left: 9px;
+			border-radius: 30px;
+			width: 30px;
+			height: 30px;
+			overflow: hidden;
+			margin: 0;
+			padding: 0;
+			border: 2px solid rgba(255, 255, 255, 0.24);
+		}
+		.chat-title .avatar img {
+			width: 100%;
+			height: auto;
+		}
+		.chat-title h2 {
+			color: #fff;
+			font-size: 8px;
+			letter-spacing: 1px;
+		}
+		
 	</style>
     <!--
       This CDN points to the latest official release of Web Chat. If you need to test against Web Chat's latest bits, please refer to pointing to Web Chat's MyGet feed:
@@ -37,11 +103,16 @@
 
 </head>
 <body>
-
-	<div id="webchat" role="main"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
-	<script>
-		(async function () {
+	<div class="chat-title">
+		<h1>Saggezza</h1>
+		<h2>Service Desk - Bot</h2>
+		<figure class="avatar">
+			<img src="./Images/logo_saggezza.png"></figure>
+		</div>
+		<div id="webchat" role="main"></div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+		<script>
+			(async function () {
             // In this demo, we are using Direct Line token from MockBot.
             // To talk to your bot, you should use the token exchanged using your Direct Line secret.
             // You should never put the Direct Line secret in the browser or client app.
@@ -61,23 +132,23 @@
             	userAvatarInitials: '',
 
             	// Send box
-				  hideSendBox: false,
-				  hideUploadButton: true,
-				  microphoneButtonColorOnDictate: '#F33',
-				  sendBoxBackground: 'rgba(0, 0, 0, 0.3)',
-				  sendBoxButtonColor: '#fff',
-				  sendBoxButtonColorOnDisabled: '#ccc',
-				  sendBoxButtonColorOnFocus: '#fff',
-				  sendBoxButtonColorOnHover: '#333',
-				  sendBoxHeight: 40,
-				  sendBoxMaxHeight: 200,
-				  sendBoxTextColor: 'White',
-				  sendBoxBorderBottom: '',
-				  sendBoxBorderLeft: '',
-				  sendBoxBorderRight: '',
-				  sendBoxBorderTop: 'none',
-				  sendBoxPlaceholderColor: '#fff',
-				  sendBoxTextWrap: false,         	
+            	hideSendBox: false,
+            	hideUploadButton: true,
+            	microphoneButtonColorOnDictate: '#F33',
+            	sendBoxBackground: 'rgba(0, 0, 0, 0.3)',
+            	sendBoxButtonColor: '#fff',
+            	sendBoxButtonColorOnDisabled: '#ccc',
+            	sendBoxButtonColorOnFocus: '#fff',
+            	sendBoxButtonColorOnHover: '#333',
+            	sendBoxHeight: 40,
+            	sendBoxMaxHeight: 200,
+            	sendBoxTextColor: 'White',
+            	sendBoxBorderBottom: '',
+            	sendBoxBorderLeft: '',
+            	sendBoxBorderRight: '',
+            	sendBoxBorderTop: 'none',
+            	sendBoxPlaceholderColor: '#fff',
+            	sendBoxTextWrap: false,
             };
 
 
