@@ -14,7 +14,9 @@
 
   function attachSignin(element) {    
     auth2.attachClickHandler(element, {},
-        function(googleUser) {   
+        function(googleUser) {
+          sessionStorage.setItem("UserFirstName",googleUser.getBasicProfile().getGivenName());
+          sessionStorage.setItem("UserLastName",googleUser.getBasicProfile().getFamilyName());          
           sessionStorage.setItem("UserEmailId",googleUser.getBasicProfile().getEmail());
           sessionStorage.setItem("UserAvatar",googleUser.getBasicProfile().getImageUrl());
           sessionStorage.setItem("UserProfileGoogle",JSON.stringify(googleUser));

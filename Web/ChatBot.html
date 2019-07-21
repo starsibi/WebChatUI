@@ -140,6 +140,8 @@
             const { token } = await res.json();
             var UserEmail = sessionStorage.getItem("UserEmailId");
             var UserAvatar = sessionStorage.getItem("UserAvatar");
+            var UserFirstName = sessionStorage.getItem("UserFirstName");
+            var UserLastName = sessionStorage.getItem("UserLastName");
 
             const styleOptions = {
             	backgroundColor:'#83BB00',            	
@@ -181,7 +183,8 @@
                         // To minimize unexpected behaviors, we recommend to treat the "action" object as if it is immutable.
                         // We use simple-update-in package to update "action" with partial deep cloning.
                         action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'email'], () => UserEmail);
-                        action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'Name'], () => "UserEmail");
+                        action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'firstName'], () => UserFirstName);
+                        action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'lastName'], () => UserLastName);
                     }
 
                     return next(action);
