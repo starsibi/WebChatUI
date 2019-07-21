@@ -21,6 +21,8 @@
 		}
 		#webchat>div{
 			background-image: url(./Images/Saggezza_background.png);
+			background-attachment: fixed;
+    		background-size: 100%;
 		}
 
 		.main form input{
@@ -90,6 +92,22 @@
 			font-size: 8px;
 			letter-spacing: 1px;
 		}
+		.content .message .bubble{
+			background: rgba(0, 0, 0, 0.3) !important;
+    		border-radius: 10px 10px 0 10px !important;
+    		border: none !important;
+    		color: #fff !important;
+    		font-size: 1rem !important: ;
+		}
+		.content .message .bubble{
+			border-radius: 10px 10px 10px 0 !important;
+		}
+		.content .message .from-user.bubble{
+			border-radius: 10px 10px 0 10px !important;
+		}
+		.content .webchat__row span{
+			color:#fff;
+		}
 		
 	</style>
     <!--
@@ -151,7 +169,7 @@
             	sendBoxTextWrap: false,
             };
 
-
+       
             // We are adding a new middleware to customize the behavior of DIRECT_LINE/POST_ACTIVITY.
             const store = window.WebChat.createStore(
             	{},
@@ -172,10 +190,9 @@
 
             window.WebChat.renderWebChat({
             	directLine: window.WebChat.createDirectLine({ token: 'Bg_uf1m3oOI.LqD3ef0uTHmollzaeZWXLXwurzrT6ISTP2Kj_Y63wII' }),
-                // We will use a custom version of Redux store, which we added middleware to handle backchannel messages.
                 store,
-                styleOptions,                 
-
+                styleOptions, 
+                               
             }, document.getElementById('webchat'));
 
 
