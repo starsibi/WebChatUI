@@ -22,7 +22,7 @@
 		#webchat>div{
 			background-image: url(./Images/Saggezza_background.png);
 			background-attachment: fixed;
-    		background-size: 100%;
+			background-size: 100%;
 		}
 
 		.main form input{
@@ -94,10 +94,10 @@
 		}
 		.content .message .bubble{
 			background: rgba(0, 0, 0, 0.3) !important;
-    		border-radius: 10px 10px 0 10px !important;
-    		border: none !important;
-    		color: #fff !important;
-    		font-size: 1rem !important: ;
+			border-radius: 10px 10px 0 10px !important;
+			border: none !important;
+			color: #fff !important;
+			font-size: 1rem !important;
 		}
 		.content .message .bubble{
 			border-radius: 10px 10px 10px 0 !important;
@@ -108,7 +108,77 @@
 		.content .webchat__row span{
 			color:#fff;
 		}
-		
+		.signout-title{
+			position: absolute;
+			font-weight: bold;
+			font-size: 1.2rem;
+			color: black;
+			left: calc(100% - 220px);
+			font-family: 'Open Sans', sans-serif;
+		}
+		.toggle {
+			position: absolute;
+			top: 50%;
+			left: calc(100% - 100px);
+			transform: translate3d(-50%, -50%, 0);
+		}
+		.toggle:before {			
+			position: absolute;
+			left: -56px;
+			top: 30px;
+			font-size: 18px;
+			color: #fff;
+		}
+		.toggle:after {			
+			position: absolute;
+			right: -46px;
+			top: 30px;
+			font-size: 18px;
+			color: rgba(253, 15, 21, 0.31);
+		}
+		.toggle label {
+			position: relative;
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			background-color: #fd1015;
+			border-radius: 50px;
+			cursor: pointer;			
+		}
+		.toggle label:before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			transition: width 0.2s cubic-bezier(0, -1.85, 0.27, 1.75);
+			height: 30px;
+			width: 30px;
+			background-color: #fd0f14;
+			border-radius: 46px;
+			box-shadow: inset 0px 0px 0px 8px #fff;
+		}
+		.toggle input {
+			display: none;
+		}
+		.toggle input:checked + label {
+			background-color:rgb(131, 187, 0);
+			box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, 0.1), 0px 9px 15px 0px rgba(3, 132, 28, 0.5411764705882353);
+		}
+		.toggle input:checked + label:before {
+			width: 10px;
+			background-color: #fff;
+		}
+		.on {
+			background-color: #6fc57c;
+		}
+		.on .toggle:before {
+			color: rgba(62, 160, 81, 0.89);
+		}
+		.on .toggle:after {
+			color: #fff;
+		}
+
 	</style>
     <!--
       This CDN points to the latest official release of Web Chat. If you need to test against Web Chat's latest bits, please refer to pointing to Web Chat's MyGet feed:
@@ -121,29 +191,63 @@
 
 </head>
 <body>
+
 	<div class="chat-title">
 		<h1>Saggezza</h1>
 		<h2>Service Desk - Bot</h2>
 		<figure class="avatar">
-			<img src="./Images/logo_saggezza.png"></figure>
+			<img src="./Images/logo_saggezza.png">
+		</figure>
+		<span class="signout-title">Sign Out</span>
+		<div class="toggle">
+			<input type="checkbox" id="toggle" />
+			<label for="toggle"></label>
 		</div>
-		<div id="webchat" role="main"></div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
-		<script>
-			(async function () {
-          
-            var UserEmail = sessionStorage.getItem("UserEmailId");
-            var UserAvatar = sessionStorage.getItem("UserAvatar");
-            var UserFirstName = sessionStorage.getItem("UserFirstName");
-            var UserLastName = sessionStorage.getItem("UserLastName");
+	</div>
+	<div id="webchat" role="main"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+	<script>
+		function isSet(value) {
+			if ((value != undefined) && (value != null) && (value != "") && (value != "undefined") && (value != "null")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 
-            const styleOptions = {
-            	backgroundColor:'#83BB00',            	
+		$(function() {
+			var IsAuthorisedUser = isSet(sessionStorage.getItem("UserProfileGoogle"));
+			if(!IsAuthorisedUser){
+				window.location.pathname = "index.html";
+			}else{
+				$("#toggle").prop("checked",true);
+			}
+		});
 
-            	botAvatarImage: './Images/logo_saggezza.png',
-            	botAvatarInitials: 'SG',
-            	userAvatarImage: UserAvatar ,
-            	userAvatarInitials: '',
+		$("#toggle").click(function(){
+			if(!$(this).prop("checked")){
+				sessionStorage.removeItem("UserProfileGoogle");
+				sessionStorage.removeItem("UserLastName");
+				sessionStorage.removeItem("UserEmailId");
+				sessionStorage.removeItem("UserFirstName");
+				sessionStorage.removeItem("UserAvatar");
+				window.location.pathname = "index.html";				
+			}
+		});
+		(async function () {
+
+			var UserEmail = sessionStorage.getItem("UserEmailId");
+			var UserAvatar = sessionStorage.getItem("UserAvatar");
+			var UserFirstName = sessionStorage.getItem("UserFirstName");
+			var UserLastName = sessionStorage.getItem("UserLastName");
+
+			const styleOptions = {
+				backgroundColor:'#83BB00',            	
+
+				botAvatarImage: './Images/logo_saggezza.png',
+				botAvatarInitials: 'SG',
+				userAvatarImage: UserAvatar ,
+				userAvatarInitials: '',
 
             	// Send box
             	hideSendBox: false,
@@ -165,7 +269,7 @@
             	sendBoxTextWrap: false,
             };
 
-       
+
             // We are adding a new middleware to customize the behavior of DIRECT_LINE/POST_ACTIVITY.
             const store = window.WebChat.createStore(
             	{},
@@ -187,9 +291,9 @@
 
             window.WebChat.renderWebChat({
             	directLine: window.WebChat.createDirectLine({ token: 'Bg_uf1m3oOI.LqD3ef0uTHmollzaeZWXLXwurzrT6ISTP2Kj_Y63wII' }),
-                store,
-                styleOptions, 
-                               
+            	store,
+            	styleOptions, 
+
             }, document.getElementById('webchat'));
 
 
