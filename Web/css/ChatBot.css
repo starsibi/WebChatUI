@@ -1,0 +1,164 @@
+html, body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    font-family:'Open Sans', sans-serif;
+}
+
+#webchat {
+    height: 100%;
+    width: 100%;
+}
+#webchat>div{
+    background-image: url(../Images/Saggezza_background.png);
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+.main form input{
+    background: none;
+}
+
+.chat-title {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 45px;
+    -ms-flex: 0 1 45px;
+    flex: 0 1 45px;
+    position: fixed;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 10px 10px 10px 50px;
+}
+.chat-title h1, .chat-title h2 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+.chat-title {   
+    width: 100%;    
+    z-index: 2;
+    overflow: hidden;    
+    background-attachment: fixed;
+    background-size: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.chat-title .avatar {
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    left: 9px;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 2px solid rgba(255, 255, 255, 0.24);
+}
+.chat-title .avatar img {
+    width: 100%;
+    height: auto;
+}
+.chat-title h2 {
+    color: #fff;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+.content .message .bubble{
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 10px 10px 0 10px !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 1rem !important;
+}
+.content .message .bubble{
+    border-radius: 10px 10px 10px 0 !important;
+}
+.content .message .from-user.bubble{
+    border-radius: 10px 10px 0 10px !important;
+}
+.content .webchat__row span{
+    color:#fff;
+}
+.toggle {
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 100px);
+    transform: translate3d(-50%, -50%, 0);
+}
+.toggle:before {			
+    position: absolute;
+    left: -56px;
+    top: 30px;
+    font-size: 18px;
+    color: #fff;
+}
+.toggle:after {			
+    position: absolute;
+    right: -46px;
+    top: 30px;
+    font-size: 18px;
+    color: rgba(253, 15, 21, 0.31);
+}
+.toggle label {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #fd1015;
+    border-radius: 50px;
+    cursor: pointer;			
+}
+.toggle label:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s cubic-bezier(0, -1.85, 0.27, 1.75);
+    height: 30px;
+    width: 30px;
+    background-color: #fd0f14;
+    border-radius: 46px;
+    box-shadow: inset 0px 0px 0px 8px #fff;
+}
+.toggle input {
+    display: none;
+}
+.toggle input:checked + label {
+    background-color:rgb(131, 187, 0);
+    box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, 0.1), 0px 9px 15px 0px rgba(3, 132, 28, 0.5411764705882353);
+}
+.toggle input:checked + label:before {
+    width: 10px;
+    background-color: #fff;
+}
+.on {
+    background-color: #6fc57c;
+}
+.on .toggle:before {
+    color: rgba(62, 160, 81, 0.89);
+}
+.on .toggle:after {
+    color: #fff;
+}
