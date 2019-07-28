@@ -4,19 +4,8 @@
 <head>
     <title>Saggezza - Chat Bot</title>
     <base href="/">
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <meta name=description content="Saggezza Chat Bot for service desk">
     <meta name=viewport content="width=device-width,initial-scale=1">
-    <meta name=mobile-web-app-capable content=yes>
-    <meta name=apple-mobile-web-app-capable content=yes>
-    <meta name=application-name content="Saggezza Chatbot">
-    <meta name=apple-mobile-web-app-status-bar-style content=#83BB00>
-    <meta name=apple-mobile-web-app-title content="Chat Bot">
     <meta name=theme-color content=#83BB00>
-    <link rel=icon sizes=192x192 href=./Images/icons/icon-192x192.png>
-    <link rel=apple-touch-icon href=./Images/icons/icon-192x192.png>
-    <meta name=msapplication-TileImage content=./Images/icons/icon-144x144.png>
-    <meta name=msapplication-TileColor content=#83BB00>
     <link rel=manifest href=/manifest.json>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/Login_Page_Layout.css">
@@ -54,7 +43,7 @@
             navigator.serviceWorker.register('sw.js')
                 .then(() => console.log('service worker installed'))
                 .catch(err => console.error('Error', err));
-        }
+        }      
     </script>
 </body>
 </html>

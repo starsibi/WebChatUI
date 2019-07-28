@@ -15,7 +15,14 @@ var filesToCache = [
     '/js/webchat.js',
     '/Images/cropped-favicon_saggezza-32x32.png',
     '/Images/logo_saggezza.png',
-    '/Images/saggezza_background.png'
+    '/Images/saggezza_background.png',
+    '/Images/icons/icon-72x72.png',
+    '/Images/icons/icon-96x96.png',
+    '/Images/icons/icon-128x128.png',
+    '/Images/icons/icon-144x144.png',
+    '/Images/icons/icon-152x152.png',
+    '/Images/icons/icon-192x192.png',
+    '/Images/icons/icon-512x512.png'
 
 ];
 
