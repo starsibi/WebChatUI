@@ -4,6 +4,8 @@
 <head>
     <title>Saggezza - Chat Bot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#83BB00" />
+    <base href="/">
     <link rel=manifest href=/manifest.json>
     <link rel="icon" href="./Images/cropped-favicon_saggezza-32x32.png" sizes="32x32">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -35,16 +37,14 @@
         </div>
     </div>
     <script src="./js/jquery.min.js"></script>
-    <script src="./js/api_client.js"></script>  
-    <script src="./js/Login.js"></script>    
+    <script src="./js/api_client.js"></script>
+    <script src="./js/Login.js"></script>
     <script>
-        
         if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('service worker installed'))
-            .catch(err => console.error('Error', err));
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('service worker installed'))
+                .catch(err => console.error('Error', err));
         }
-      
-        </script>
+    </script>
 </body>
 </html>

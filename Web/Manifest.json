@@ -3,11 +3,13 @@
   "short_name": "ChatBot",
   "start_url": "/?utm_source=homescreen",
   "display": "standalone",
-  "icons": [{
-   "src": "./Images/cropped-favicon_saggezza-32x32.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }],
+  "icons": [
+    {
+      "src": "./Images/cropped-favicon_saggezza-32x32.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
   "background_color": "#83BB00",
   "theme_color": "#83BB00"
 }
