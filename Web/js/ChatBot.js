@@ -6,23 +6,23 @@ function isSet(value) {
     }
 }
 
-$(function() {
+$(function () {
     var IsAuthorisedUser = isSet(sessionStorage.getItem("UserProfileGoogle"));
-    if(!IsAuthorisedUser){
+    if (!IsAuthorisedUser) {
         window.location.pathname = "index.html";
-    }else{
-        $("#toggle").prop("checked",true);
+    } else {
+        $("#toggle").prop("checked", true);
     }
 });
 
-$("#toggle").click(function(){
-    if(!$(this).prop("checked")){
+$("#toggle").click(function () {
+    if (!$(this).prop("checked")) {
         sessionStorage.removeItem("UserProfileGoogle");
         sessionStorage.removeItem("UserLastName");
         sessionStorage.removeItem("UserEmailId");
         sessionStorage.removeItem("UserFirstName");
         sessionStorage.removeItem("UserAvatar");
-        window.location.pathname = "index.html";				
+        window.location.pathname = "index.html";
     }
 });
 (async function () {
@@ -33,11 +33,11 @@ $("#toggle").click(function(){
     var UserLastName = sessionStorage.getItem("UserLastName");
 
     const styleOptions = {
-        backgroundColor:'#83BB00',            	
+        backgroundColor: '#83BB00',
 
         botAvatarImage: './Images/logo_saggezza.png',
         botAvatarInitials: 'SG',
-        userAvatarImage: UserAvatar ,
+        userAvatarImage: UserAvatar,
         userAvatarInitials: '',
 
         // Send box
@@ -75,15 +75,23 @@ $("#toggle").click(function(){
                 action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'firstName'], () => UserFirstName);
                 action = window.simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'lastName'], () => UserLastName);
             }
-
+            if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {                
+                dispatch({
+                    type: 'WEB_CHAT/SEND_EVENT',
+                    payload: {
+                        name: 'webchat/join',
+                        value: { language: "Prithvi-Rama" }
+                    }
+                });
+            }
             return next(action);
         }
-        );
+    );
 
     window.WebChat.renderWebChat({
         directLine: window.WebChat.createDirectLine({ token: 'Bg_uf1m3oOI.LqD3ef0uTHmollzaeZWXLXwurzrT6ISTP2Kj_Y63wII' }),
         store,
-        styleOptions, 
+        styleOptions,
 
     }, document.getElementById('webchat'));
 
